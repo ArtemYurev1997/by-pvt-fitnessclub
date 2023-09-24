@@ -1,8 +1,6 @@
 package by.pvt.fitnessclub.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,12 +17,15 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_attendance")
     @Column(name = "id")
     private Long id;
-    @Column(name = "client_id")
-    private Long clientId;
     @Column(name = "date_of_visit")
     private LocalDate dateOfVisit;
     @Column(name = "amount_spent")
     private BigDecimal amountSpent;
     @Column(name = "activity_id")
     private Long activityId;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "visitor_id")
+    private Visitor visitor;
 }

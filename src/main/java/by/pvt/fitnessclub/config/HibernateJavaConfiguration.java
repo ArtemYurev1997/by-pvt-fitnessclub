@@ -27,10 +27,13 @@ public class HibernateJavaConfiguration {
         configuration = new Configuration();
         configuration.setProperties(properties);
         configuration.addAnnotatedClass(Client.class);
+        configuration.addAnnotatedClass(Visitor.class);
+        configuration.addAnnotatedClass(Employee.class);
         configuration.addAnnotatedClass(Office.class);
         configuration.addAnnotatedClass(Activities.class);
         configuration.addAnnotatedClass(OfficeWithSubselect.class);
         configuration.addAnnotatedClass(Attendance.class);
+        configuration.addAnnotatedClass(RecordsWithFields.class);
         serviceRegistryBuilder = new StandardServiceRegistryBuilder();
         serviceRegistryBuilder.applySettings(properties);
     }

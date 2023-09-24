@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(schema = "testsch", name ="activities")
 @Entity
@@ -20,4 +21,7 @@ public class Activities {
     private String name;
     @Column(name = "cost")
     private Double cost;
+    @OneToMany(mappedBy = "activities")
+    private List<Office> offices;
+
 }
