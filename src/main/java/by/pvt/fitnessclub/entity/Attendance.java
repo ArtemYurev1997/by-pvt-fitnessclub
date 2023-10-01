@@ -23,9 +23,9 @@ public class Attendance {
     private BigDecimal amountSpent;
     @Column(name = "activity_id")
     private Long activityId;
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "visitor_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Visitor visitor;
 }

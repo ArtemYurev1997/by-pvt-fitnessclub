@@ -6,7 +6,11 @@ import by.pvt.fitnessclub.repository.ActivitiesDaoRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class ActivitiesRepositoryHibernate implements ActivitiesDaoRepository {
@@ -47,4 +51,26 @@ public class ActivitiesRepositoryHibernate implements ActivitiesDaoRepository {
         Query query = session.createQuery("select a from Activities a");
         return (List<Activities>) query.getResultList();
     }
+
+    public List<Activities> findAll() {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Activities> criteriaQuery = criteriaBuilder.createQuery(Activities.class);
+        //Root указывает целевой класс, откуда будет делаться выборка (альтернатива jpql: from Employee e)
+        Root<Activities> root = criteriaQuery.from(Activities.class);
+        //Если склеить всё это получиться: select e from Employee e
+        criteriaQuery.select(root);
+        List<Activities> activitiesList = entityManager.createQuery(criteriaQuery).getResultList();
+        return activitiesList;
+    }
+
+    public Double getActivityMinSalary() {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Double> criteriaQuery = criteriaBuilder.createQuery(Double.class);
+        criteriaQuery.select(criteriaBuilder.min(criteriaQuery.from(Activities.class).get("cost")));
+        return entityManager.createQuery(criteriaQuery).getSingleResult();
+    }
+
+
 }

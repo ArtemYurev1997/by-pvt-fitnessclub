@@ -27,4 +27,8 @@ public class ClientService {
     public List<Client> getAllClients() {
         return clientDaoRepository.getAllClients();
     }
+
+    public List<Client> findByName(String name) {
+        return clientDaoRepository.findByName(name);
+    }
 }

@@ -1,13 +1,19 @@
 package by.pvt.fitnessclub.repository.jpa;
 
 import by.pvt.fitnessclub.config.HibernateJavaConfiguration;
+import by.pvt.fitnessclub.entity.Activities;
+import by.pvt.fitnessclub.entity.Client;
 import by.pvt.fitnessclub.entity.Office;
 import by.pvt.fitnessclub.entity.OfficeWithSubselect;
 import by.pvt.fitnessclub.repository.OfficeDaoRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -94,4 +100,23 @@ public class OfficeRepositoryHibernate implements OfficeDaoRepository {
         Query query = session.createQuery("select os from OfficeWithSubselect os");
         return (List<OfficeWithSubselect>) query.getResultList();
     }
+
+    public Integer getAllCountOfPeopleInComplex() {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Integer> criteriaQuery = criteriaBuilder.createQuery(Integer.class);
+        criteriaQuery.select(criteriaBuilder.sum(criteriaQuery.from(Office.class).get("maxCount")));
+        return entityManager.createQuery(criteriaQuery).getSingleResult();
+    }
+
+    public List<Office> findMaxCountAndPrice(Integer count, BigDecimal price) {
+        EntityManager entityManager = sessionFactory.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);
+        Root<Office> office = criteriaQuery.from(Office.class);
+        criteriaQuery.select(office).where(criteriaBuilder.and(criteriaBuilder.equal(office.get("maxCount"), count), criteriaBuilder.equal(office.get("price"), price)));
+        List<Office> offices = entityManager.createQuery(criteriaQuery).getResultList();
+        return offices;
+    }
+
 }

@@ -1,8 +1,6 @@
 package by.pvt.fitnessclub.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +11,11 @@ import java.time.LocalDate;
 
 @Table(schema = "testsch", name ="employee")
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(callSuper = true)
 @PrimaryKeyJoinColumn(name = "person_employee_id")
 public class Employee extends Client {
     @Column(name = "date_enter")

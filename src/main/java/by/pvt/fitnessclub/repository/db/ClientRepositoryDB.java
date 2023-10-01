@@ -41,4 +41,9 @@ public class ClientRepositoryDB implements ClientDaoRepository {
         return clients;
     }
 
+    @Override
+    public List<Client> findByName(String name) {
+        return null;
+    }
+
 }

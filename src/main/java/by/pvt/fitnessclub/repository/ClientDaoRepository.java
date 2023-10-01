@@ -12,4 +12,6 @@ public interface ClientDaoRepository {
     Client findById(Long id);
 
     List<Client> getAllClients();
+
+    List<Client> findByName(String name);
 }

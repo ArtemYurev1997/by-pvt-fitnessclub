@@ -1,9 +1,7 @@
 package by.pvt.fitnessclub.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -12,9 +10,11 @@ import java.util.List;
 
 @Table(schema = "testsch", name ="user")
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 //@MappedSuperclass
 //@Where(clause = "status = 'PREMIUM'")

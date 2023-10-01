@@ -2,9 +2,7 @@ package by.pvt.fitnessclub.entity;
 
 
 import by.pvt.fitnessclub.enums.ClientStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,7 +10,8 @@ import java.util.List;
 
 @Table(schema = "testsch", name ="visitor")
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "person_visitor_id")
@@ -29,6 +28,8 @@ public class Visitor extends Client {
     @Column(name = "amount_spent")
     private Double amountSpent;
     @OneToMany(mappedBy = "visitor")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private List<Attendance> attendances;
 
 }
