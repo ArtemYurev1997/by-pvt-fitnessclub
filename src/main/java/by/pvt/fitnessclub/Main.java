@@ -1,5 +1,6 @@
 package by.pvt.fitnessclub;
 
+import by.pvt.fitnessclub.entity.Activities;
 import by.pvt.fitnessclub.repository.jpa.*;
 import by.pvt.fitnessclub.service.AttendanceService;
 import by.pvt.fitnessclub.service.ClientService;
@@ -88,9 +89,11 @@ public class Main {
 //        attendanceService.addAttendance(attendance2);
 
         EmployeeRepositoryHibernate employeeRepositoryHibernate = new EmployeeRepositoryHibernate();
+//        ActivitiesRepositoryHibernate activitiesRepositoryHibernate = new ActivitiesRepositoryHibernate();
+//        activitiesRepositoryHibernate.addActivities(new Activities(null, "Лифтинг", 6.5));
 //        System.out.println(employeeRepositoryHibernate.findByMinSalary());
 //        AttendanceRepositoryHibernate attendanceRepositoryHibernate = new AttendanceRepositoryHibernate();
-//        System.out.println(attendanceRepositoryHibernate.findByDate(startDate, endDate));
+//        System.out.println(attendanceRepositoryHibernate.findSumByDate(startDate, endDate));
 //        System.out.println(officeRepositoryHibernate.getAllCountOfPeopleInComplex());
 //        System.out.println(clientRepositoryHibernate.findAgeByRange(25, 44));
 //        System.out.println(officeRepositoryHibernate.findMaxCountAndPrice(15, new BigDecimal(10)));
@@ -100,7 +103,8 @@ public class Main {
 //        attendanceRepositoryHibernate.updateVisitorId(4L, 10L);
 //        attendanceRepositoryHibernate.updateVisitorId(5L, 11L);
 //        attendanceRepositoryHibernate.updateVisitorId(6L, 12L);
-        System.out.println(attendanceRepositoryHibernate.findNameAndAgeVisitors("Олег", 35));
+//        System.out.println(attendanceRepositoryHibernate.findNameAndAgeVisitors("Олег", 35));
+        officeRepositoryHibernate.getAllOfficesAndAllActivitiesAndOfficeById(16L);
 
     }
 }

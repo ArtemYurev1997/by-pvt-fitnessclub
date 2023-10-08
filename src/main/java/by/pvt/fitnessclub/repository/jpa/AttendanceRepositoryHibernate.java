@@ -57,7 +57,7 @@ public class AttendanceRepositoryHibernate implements AttendanceDaoRepository {
         return attendances;
     }
 
-    public List<Attendance> findByDate(LocalDate start, LocalDate end) {
+    public List<Attendance> findSumByDate(LocalDate start, LocalDate end) {
         Session session = sessionFactory.openSession();
         List<Attendance> attendances = session.createQuery("select sum(a.amountSpent) from Attendance a where a.dateOfVisit>=:start " +
                 "and a.dateOfVisit<=:end").setParameter("start", start).setParameter("end", end).getResultList();

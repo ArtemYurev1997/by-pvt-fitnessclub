@@ -14,7 +14,7 @@ public class HibernateJavaConfiguration {
 
     static {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.hbm2ddl.auto", "none");
         properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
@@ -23,6 +23,10 @@ public class HibernateJavaConfiguration {
         properties.setProperty("hibernate.connection.username", "postgres");
         properties.setProperty("hibernate.connection.password", "sa");
         properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.cache.use_second_level_cache", "true");
+        properties.setProperty("hibernate.cache.use_query_cache", "true");
+        properties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.internal.EhcacheRegionFactory");
+        properties.setProperty("net.sf.ehcache.configurationResourceName", "META-INF/config/ehcache.xml");
 
         configuration = new Configuration();
         configuration.setProperties(properties);

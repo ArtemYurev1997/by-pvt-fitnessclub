@@ -3,6 +3,7 @@ package by.pvt.fitnessclub.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "activities")
 public class Activities {
     @Id
     @GeneratedValue
@@ -21,7 +24,7 @@ public class Activities {
     private String name;
     @Column(name = "cost")
     private Double cost;
-    @OneToMany(mappedBy = "activities")
-    private List<Office> offices;
+//    @OneToMany(mappedBy = "activities")
+//    private List<Office> offices;
 
 }

@@ -1,10 +1,7 @@
 package by.pvt.fitnessclub.repository.jpa;
 
 import by.pvt.fitnessclub.config.HibernateJavaConfiguration;
-import by.pvt.fitnessclub.entity.Activities;
-import by.pvt.fitnessclub.entity.Client;
-import by.pvt.fitnessclub.entity.Office;
-import by.pvt.fitnessclub.entity.OfficeWithSubselect;
+import by.pvt.fitnessclub.entity.*;
 import by.pvt.fitnessclub.repository.OfficeDaoRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -118,5 +115,17 @@ public class OfficeRepositoryHibernate implements OfficeDaoRepository {
         List<Office> offices = entityManager.createQuery(criteriaQuery).getResultList();
         return offices;
     }
+
+    public void getAllOfficesAndAllActivitiesAndOfficeById(Long activityId) {
+        Session session = sessionFactory.openSession();
+        List<Employee> employees = session.createQuery("select a from Employee a").getResultList();
+        List<Activities> activities = session.createQuery("select a from Activities a").getResultList();
+        session.close();
+        Session session1 = sessionFactory.openSession();
+        Activities activity = session1.get(Activities.class, activityId);
+        session1.close();
+
+    }
+
 
 }
