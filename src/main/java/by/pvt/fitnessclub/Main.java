@@ -1,10 +1,15 @@
 package by.pvt.fitnessclub;
 
+import by.pvt.fitnessclub.config.UserConfig;
 import by.pvt.fitnessclub.entity.Activities;
+import by.pvt.fitnessclub.entity.Client;
 import by.pvt.fitnessclub.repository.jpa.*;
 import by.pvt.fitnessclub.service.AttendanceService;
 import by.pvt.fitnessclub.service.ClientService;
 import by.pvt.fitnessclub.service.OfficeService;
+import by.pvt.fitnessclub.service.impl.ClientServiceDao;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,13 +18,17 @@ public class Main {
     public static void main(String[] args) {
         ClientRepositoryHibernate clientRepositoryHibernate = new ClientRepositoryHibernate();
         VisitorRepositoryHibernate visitorRepositoryHibernate = new VisitorRepositoryHibernate();
-        ClientService clientService = new ClientService(new ClientRepositoryHibernate());
-        OfficeService officeService = new OfficeService(new OfficeRepositoryHibernate());
-        AttendanceService attendanceService = new AttendanceService(new AttendanceRepositoryHibernate(visitorRepositoryHibernate));
+//        ClientService clientService = new ClientService(new ClientRepositoryHibernate());
+//        OfficeService officeService = new OfficeService(new OfficeRepositoryHibernate());
+//        AttendanceService attendanceService = new AttendanceService(new AttendanceRepositoryHibernate(visitorRepositoryHibernate));
         RecordsRepositoryHibernate recordsRepositoryHibernate = new RecordsRepositoryHibernate();
         AttendanceRepositoryHibernate attendanceRepositoryHibernate = new AttendanceRepositoryHibernate(visitorRepositoryHibernate);
-
         OfficeRepositoryHibernate officeRepositoryHibernate = new OfficeRepositoryHibernate();
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(UserConfig.class);
+        ClientService clientService = applicationContext.getBean("clientServiceJpa", ClientServiceDao.class);
+        System.out.println(clientService.findById(2L));
+
 //        officeRepositoryHibernate.addOffice(new Office("Тренажерный зал", 141455L, 15, OfficeStatus.ACTIVE, new BigDecimal(10.0)));
 //        officeRepositoryHibernate.addOffice(new Office("Теннисный корт", 1654276L, 14, OfficeStatus.ACTIVE, new BigDecimal(23.0)));
 //        officeRepositoryHibernate.addOffice(new Office("Футбольный зал", 3672341L, 10, OfficeStatus.ACTIVE, new BigDecimal(16.0)));
@@ -104,7 +113,7 @@ public class Main {
 //        attendanceRepositoryHibernate.updateVisitorId(5L, 11L);
 //        attendanceRepositoryHibernate.updateVisitorId(6L, 12L);
 //        System.out.println(attendanceRepositoryHibernate.findNameAndAgeVisitors("Олег", 35));
-        officeRepositoryHibernate.getAllOfficesAndAllActivitiesAndOfficeById(16L);
+//        officeRepositoryHibernate.getAllOfficesAndAllActivitiesAndOfficeById(16L);
 
     }
 }

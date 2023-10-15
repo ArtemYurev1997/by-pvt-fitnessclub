@@ -6,6 +6,7 @@ import by.pvt.fitnessclub.entity.Visitor;
 import by.pvt.fitnessclub.repository.AttendanceDaoRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,6 +16,7 @@ import javax.persistence.criteria.Root;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class AttendanceRepositoryHibernate implements AttendanceDaoRepository {
     private final SessionFactory sessionFactory;
     private final VisitorRepositoryHibernate visitorRepositoryHibernate;

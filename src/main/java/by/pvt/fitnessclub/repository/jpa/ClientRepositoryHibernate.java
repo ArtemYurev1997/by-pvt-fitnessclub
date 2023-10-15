@@ -5,14 +5,14 @@ import by.pvt.fitnessclub.entity.Client;
 import by.pvt.fitnessclub.repository.ClientDaoRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
-
+import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+@Repository
 public class ClientRepositoryHibernate implements ClientDaoRepository {
     private final SessionFactory sessionFactory;
 

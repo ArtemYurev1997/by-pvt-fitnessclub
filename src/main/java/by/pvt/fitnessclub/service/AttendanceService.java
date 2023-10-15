@@ -5,26 +5,14 @@ import by.pvt.fitnessclub.repository.AttendanceDaoRepository;
 
 import java.util.List;
 
-public class AttendanceService {
-    private final AttendanceDaoRepository attendanceDaoRepository;
+public interface AttendanceService {
 
-    public AttendanceService(AttendanceDaoRepository attendanceDaoRepository) {
-        this.attendanceDaoRepository = attendanceDaoRepository;
-    }
+     void addAttendance(Attendance attendance);
 
-    public void addAttendance(Attendance attendance) {
-        attendanceDaoRepository.addAttendance(attendance);
-    }
 
-    public void delete(Long id) {
-        attendanceDaoRepository.delete(id);
-    }
+    void delete(Long id);
 
-    public Attendance findById(Long id) {
-        return attendanceDaoRepository.findById(id);
-    }
+    Attendance findById(Long id);
 
-    public List<Attendance> getAllActivities() {
-        return attendanceDaoRepository.getAllAttendances();
-    }
+    public List<Attendance> getAllActivities();
 }

@@ -4,14 +4,15 @@ import by.pvt.fitnessclub.config.HibernateJavaConfiguration;
 import by.pvt.fitnessclub.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.math.BigDecimal;
 import java.util.List;
 
+@Repository
 public class EmployeeRepositoryHibernate {
     private final SessionFactory sessionFactory;
 

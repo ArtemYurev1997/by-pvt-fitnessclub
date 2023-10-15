@@ -5,30 +5,14 @@ import by.pvt.fitnessclub.repository.ClientDaoRepository;
 
 import java.util.List;
 
-public class ClientService {
-    private final ClientDaoRepository clientDaoRepository;
+public interface ClientService {
+     void addClient(Client client);
 
-    public ClientService(ClientDaoRepository clientDaoRepository) {
-        this.clientDaoRepository = clientDaoRepository;
-    }
+     void delete(Long id);
 
-    public void addClient(Client client) {
-        clientDaoRepository.addClient(client);
-    }
+     Client findById(Long id);
 
-    public void delete(Long id) {
-        clientDaoRepository.delete(id);
-    }
+     List<Client> getAllClients();
 
-    public Client findById(Long id) {
-        return clientDaoRepository.findById(id);
-    }
-
-    public List<Client> getAllClients() {
-        return clientDaoRepository.getAllClients();
-    }
-
-    public List<Client> findByName(String name) {
-        return clientDaoRepository.findByName(name);
-    }
+    List<Client> findByName(String name);
 }

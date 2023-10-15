@@ -5,7 +5,9 @@ import by.pvt.fitnessclub.entity.RecordsWithFields;
 import by.pvt.fitnessclub.repository.RecordsDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class RecordsRepositoryHibernate implements RecordsDao {
     private final SessionFactory sessionFactory;
 

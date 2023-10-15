@@ -5,6 +5,7 @@ import by.pvt.fitnessclub.entity.*;
 import by.pvt.fitnessclub.repository.OfficeDaoRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -14,6 +15,7 @@ import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Repository
 public class OfficeRepositoryHibernate implements OfficeDaoRepository {
     private final SessionFactory sessionFactory;
 

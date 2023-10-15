@@ -5,6 +5,7 @@ import by.pvt.fitnessclub.entity.Activities;
 import by.pvt.fitnessclub.repository.ActivitiesDaoRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -13,6 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+@Repository
 public class ActivitiesRepositoryHibernate implements ActivitiesDaoRepository {
     private final SessionFactory sessionFactory;
 
