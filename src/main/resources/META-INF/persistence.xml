@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<persistence version="2.1" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+
+    <persistence-unit name="ClientJpa">
+
+        <class>by.pvt.jdbc.entity.Client</class>
+
+        <properties>
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/testdb"/>
+
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+
+            <property name="javax.persistence.jdbc.password" value="sa"/>
+
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+
+            <property name="hibernate.show_sql" value="true"/>
+
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <property name="hibernate.format_sql" value="true"/>
+
+            <property name="hibernate.use_sql_comments" value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
