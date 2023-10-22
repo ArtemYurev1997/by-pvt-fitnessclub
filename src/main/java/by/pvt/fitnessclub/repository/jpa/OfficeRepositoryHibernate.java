@@ -3,15 +3,13 @@ package by.pvt.fitnessclub.repository.jpa;
 import by.pvt.fitnessclub.config.HibernateJavaConfiguration;
 import by.pvt.fitnessclub.entity.*;
 import by.pvt.fitnessclub.repository.OfficeDaoRepository;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -63,7 +61,7 @@ public class OfficeRepositoryHibernate implements OfficeDaoRepository {
     @Override
     public List<Office> getAllOffices() {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select o from Office o");
+        Query query = (Query) session.createQuery("select o from Office o");
         return (List<Office>) query.getResultList();
     }
 
@@ -96,12 +94,12 @@ public class OfficeRepositoryHibernate implements OfficeDaoRepository {
 
     public List<OfficeWithSubselect> getSmallOffices() {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select os from OfficeWithSubselect os");
+        Query query = (Query) session.createQuery("select os from OfficeWithSubselect os");
         return (List<OfficeWithSubselect>) query.getResultList();
     }
 
     public Integer getAllCountOfPeopleInComplex() {
-        EntityManager entityManager = sessionFactory.createEntityManager();
+        EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Integer> criteriaQuery = criteriaBuilder.createQuery(Integer.class);
         criteriaQuery.select(criteriaBuilder.sum(criteriaQuery.from(Office.class).get("maxCount")));
@@ -109,7 +107,7 @@ public class OfficeRepositoryHibernate implements OfficeDaoRepository {
     }
 
     public List<Office> findMaxCountAndPrice(Integer count, BigDecimal price) {
-        EntityManager entityManager = sessionFactory.createEntityManager();
+        EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);
         Root<Office> office = criteriaQuery.from(Office.class);

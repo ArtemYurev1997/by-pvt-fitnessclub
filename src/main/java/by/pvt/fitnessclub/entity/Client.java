@@ -1,12 +1,9 @@
 package by.pvt.fitnessclub.entity;
 
-
 import lombok.*;
 import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
-
 
 @Table(schema = "testsch", name ="user")
 @Entity

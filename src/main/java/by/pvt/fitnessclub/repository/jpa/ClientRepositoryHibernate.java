@@ -3,13 +3,13 @@ package by.pvt.fitnessclub.repository.jpa;
 import by.pvt.fitnessclub.config.HibernateJavaConfiguration;
 import by.pvt.fitnessclub.entity.Client;
 import by.pvt.fitnessclub.repository.ClientDaoRepository;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -50,7 +50,6 @@ public class ClientRepositoryHibernate implements ClientDaoRepository {
     public List<Client> getAllClients() {
         Session session = sessionFactory.openSession();
         List<Client> clients = session.createQuery("select u from Client u").getResultList();
-        session.close();
         return clients;
     }
 
@@ -61,7 +60,7 @@ public class ClientRepositoryHibernate implements ClientDaoRepository {
     }
 
     public List<Client> findAll() {
-        EntityManager entityManager = sessionFactory.createEntityManager();
+        EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Client> criteriaQuery = criteriaBuilder.createQuery(Client.class);
         Root<Client> root = criteriaQuery.from(Client.class);
@@ -71,7 +70,7 @@ public class ClientRepositoryHibernate implements ClientDaoRepository {
     }
 
     public List<Client> findAgeByRange(Integer min, Integer max) {
-        EntityManager entityManager = sessionFactory.createEntityManager();
+        EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Client> criteriaQuery = criteriaBuilder.createQuery(Client.class);
         Root<Client> client = criteriaQuery.from(Client.class);

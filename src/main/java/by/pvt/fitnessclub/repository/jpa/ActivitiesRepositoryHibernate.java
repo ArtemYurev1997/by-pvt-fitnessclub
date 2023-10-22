@@ -3,15 +3,16 @@ package by.pvt.fitnessclub.repository.jpa;
 import by.pvt.fitnessclub.config.HibernateJavaConfiguration;
 import by.pvt.fitnessclub.entity.Activities;
 import by.pvt.fitnessclub.repository.ActivitiesDaoRepository;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+
 import java.util.List;
 
 @Repository
@@ -55,7 +56,7 @@ public class ActivitiesRepositoryHibernate implements ActivitiesDaoRepository {
     }
 
     public List<Activities> findAll() {
-        EntityManager entityManager = sessionFactory.createEntityManager();
+        EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Activities> criteriaQuery = criteriaBuilder.createQuery(Activities.class);
         //Root указывает целевой класс, откуда будет делаться выборка (альтернатива jpql: from Employee e)
@@ -67,7 +68,7 @@ public class ActivitiesRepositoryHibernate implements ActivitiesDaoRepository {
     }
 
     public Double getActivityMinSalary() {
-        EntityManager entityManager = sessionFactory.createEntityManager();
+        EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Double> criteriaQuery = criteriaBuilder.createQuery(Double.class);
         criteriaQuery.select(criteriaBuilder.min(criteriaQuery.from(Activities.class).get("cost")));

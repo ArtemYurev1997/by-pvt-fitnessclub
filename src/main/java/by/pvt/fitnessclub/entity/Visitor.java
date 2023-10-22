@@ -1,10 +1,8 @@
 package by.pvt.fitnessclub.entity;
 
-
 import by.pvt.fitnessclub.enums.ClientStatus;
 import lombok.*;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,5 +29,4 @@ public class Visitor extends Client {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Attendance> attendances;
-
 }

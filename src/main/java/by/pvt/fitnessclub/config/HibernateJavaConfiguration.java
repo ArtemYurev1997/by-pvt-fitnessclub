@@ -38,6 +38,7 @@ public class HibernateJavaConfiguration {
         configuration.addAnnotatedClass(OfficeWithSubselect.class);
         configuration.addAnnotatedClass(Attendance.class);
         configuration.addAnnotatedClass(RecordsWithFields.class);
+        configuration.addAnnotatedClass(Sales.class);
         serviceRegistryBuilder = new StandardServiceRegistryBuilder();
         serviceRegistryBuilder.applySettings(properties);
     }

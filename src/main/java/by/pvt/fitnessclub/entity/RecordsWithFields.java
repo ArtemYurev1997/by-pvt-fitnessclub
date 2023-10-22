@@ -2,7 +2,7 @@ package by.pvt.fitnessclub.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Table(schema = "testsch", name ="records")

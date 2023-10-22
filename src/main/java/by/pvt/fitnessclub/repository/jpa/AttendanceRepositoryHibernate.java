@@ -4,15 +4,14 @@ import by.pvt.fitnessclub.config.HibernateJavaConfiguration;
 import by.pvt.fitnessclub.entity.Attendance;
 import by.pvt.fitnessclub.entity.Visitor;
 import by.pvt.fitnessclub.repository.AttendanceDaoRepository;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -78,7 +77,7 @@ public class AttendanceRepositoryHibernate implements AttendanceDaoRepository {
     }
 
     public List<Attendance> findNameAndAgeVisitors(String name, Integer age) {
-        EntityManager entityManager = sessionFactory.createEntityManager();
+        EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Attendance> criteriaQuery = criteriaBuilder.createQuery(Attendance.class);
         Root<Attendance> attendance = criteriaQuery.from(Attendance.class);

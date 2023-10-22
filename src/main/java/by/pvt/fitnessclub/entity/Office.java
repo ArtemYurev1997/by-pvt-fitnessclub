@@ -3,7 +3,7 @@ package by.pvt.fitnessclub.entity;
 import by.pvt.fitnessclub.enums.OfficeStatus;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class Office {
     @ManyToOne
     @JoinColumn(name = "activities_id")
     private Activities activities;
-    @OneToMany(mappedBy = "officeId")
+    @OneToMany
     private List<RecordsWithFields> recordsWithFields;
 
     public Office(String name, Long inventoryNumber, Integer maxCount, OfficeStatus officeStatus, BigDecimal price) {
