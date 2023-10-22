@@ -1,4 +1,7 @@
 package by.pvt.fitnessclub.enums;
 
-public class ClientStatus {
+public enum ClientStatus {
+    ACTIVE,
+    BLOCKED,
+    PREMIUM
 }
