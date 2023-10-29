@@ -6,16 +6,18 @@ import by.pvt.fitnessclub.repository.GenericRepository;
 import jakarta.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class RecordsRepositoryHibernate implements GenericRepository<RecordsWithFields> {
-    private final SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public RecordsRepositoryHibernate() {
-        this.sessionFactory = HibernateJavaConfiguration.getSessionFactory();
+//        this.sessionFactory = HibernateJavaConfiguration.getSessionFactory();
     }
 
 

@@ -2,37 +2,44 @@ package by.pvt.fitnessclub.service.impl;
 
 import by.pvt.fitnessclub.entity.Client;
 import by.pvt.fitnessclub.repository.ClientDaoRepository;
+import by.pvt.fitnessclub.repository.ClientRepository;
 import by.pvt.fitnessclub.service.ClientService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+
 public class ClientServiceDao implements ClientService {
+    private ClientRepository clientRepository;
+//    private final ClientDaoRepository clientDaoRepository;
 
-    private final ClientDaoRepository clientDaoRepository;
-
-    public ClientServiceDao(ClientDaoRepository clientDaoRepository) {
-        this.clientDaoRepository = clientDaoRepository;
+    @Autowired
+    public ClientServiceDao(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
-    public void addClient(Client client) {
-        clientDaoRepository.addClient(client);
+    public Client addClient(Client client) {
+        return clientRepository.save(client);
     }
 
     public void delete(Long id) {
-        clientDaoRepository.delete(id);
+        clientRepository.deleteById(id);
     }
 
     public Client findById(Long id) {
-        return clientDaoRepository.findById(id);
+        Optional<Client> client = Optional.of(clientRepository.findById(id).orElseThrow(() -> new RuntimeException("404")));
+        return client.get();
     }
 
     public List<Client> getAllClients() {
-        return clientDaoRepository.getAllClients();
+        return clientRepository.findAll();
     }
 
     public List<Client> findByName(String name) {
-        return clientDaoRepository.findByName(name);
+        return null;
     }
 }

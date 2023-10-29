@@ -11,18 +11,19 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public class AttendanceRepositoryHibernate implements AttendanceDaoRepository {
-    private final SessionFactory sessionFactory;
-    private final VisitorRepositoryHibernate visitorRepositoryHibernate;
+    @Autowired
+    private  SessionFactory sessionFactory;
 
-    public AttendanceRepositoryHibernate(VisitorRepositoryHibernate visitorRepositoryHibernate) {
-        this.visitorRepositoryHibernate = visitorRepositoryHibernate;
-        this.sessionFactory = HibernateJavaConfiguration.getSessionFactory();
+    public AttendanceRepositoryHibernate() {
+//        this.visitorRepositoryHibernate = visitorRepositoryHibernate;
+//        this.sessionFactory = HibernateJavaConfiguration.getSessionFactory();
     }
 
     @Override
@@ -65,16 +66,16 @@ public class AttendanceRepositoryHibernate implements AttendanceDaoRepository {
         return attendances;
     }
 
-    public Attendance updateVisitorId(Long id, Long visitorId) {
-        Session session = sessionFactory.openSession();
-        Attendance attendance = session.find(Attendance.class, id);
-        Visitor visitor =  visitorRepositoryHibernate.findById(visitorId);
-        session.getTransaction().begin();
-        attendance.setVisitor(visitor);
-        session.update(attendance);
-        session.getTransaction().commit();
-        return attendance;
-    }
+//    public Attendance updateVisitorId(Long id, Long visitorId) {
+//        Session session = sessionFactory.openSession();
+//        Attendance attendance = session.find(Attendance.class, id);
+//        Visitor visitor =  visitorRepositoryHibernate.findById(visitorId);
+//        session.getTransaction().begin();
+//        attendance.setVisitor(visitor);
+//        session.update(attendance);
+//        session.getTransaction().commit();
+//        return attendance;
+//    }
 
     public List<Attendance> findNameAndAgeVisitors(String name, Integer age) {
         EntityManager entityManager = (EntityManager) sessionFactory.createEntityManager();

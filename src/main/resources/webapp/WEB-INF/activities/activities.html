@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Главная страница!</title>
+</head>
+<body>
+
+<h2 th:text="Список активностей!" align="center"></h2>
+<form action="#" th:action="@{/activities/getActivities}" th:object="${activities1}"
+      method="get">
+    <fieldset>
+        <input type="submit" th:value="activities">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Cost</th>
+            </tr>
+            <tr th:each="activity : ${activities}">
+                <td th:text="${activity.name}"></td>
+                <td th:text="${activity.cost}"></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+
+<form action="#" th:action="@{/activities/addActivities}" th:object="${activitiesModel}" method="post">
+    <fieldset>
+        <label>Name</label>
+        <input type="text" th:field="*{name}" placeholder="Name">
+        <br/>
+        <label>Cost</label>
+        <input type="number" th:field="*{cost}" placeholder="Cost">
+        <br/>
+        <input type="submit" th:value="Add Activities">
+    </fieldset>
+</form>
+
+<div th:object="${newActivity}" class="activities.addForm">
+    <p>Вы добавили пользователя с id <span th:text="${newActivity.id}"></span></p>
+</div>
+
+<form action="#" th:action="@{/activities/getActivity}" th:object="${activityResponse}" method="post">
+    <fieldset>
+        <label>Id</label>
+        <input type="number" name="id" th:value="*{id}" placeholder="Id">
+        <br/>
+        <input type="submit" th:value="Get Activities">
+    </fieldset>
+</form>
+
+<form action="#" th:action="@{/activities/updateActivities}" th:object="${activityResponse}" method="post">
+    <fieldset>
+        <label>Id</label>
+        <input type="number" th:field="*{id}" placeholder="Id">
+        <br/>
+        <label>Name</label>
+        <input type="text" th:field="*{name}" placeholder="Name">
+        <br/>
+        <label>Cost</label>
+        <input type="number" th:field="*{cost}" placeholder="Cost">
+        <br/>
+        <input type="submit" th:value="Update Activities">
+    </fieldset>
+</form>
+
+<form action="#" th:action="@{/activities/deleteActivities}" th:object="${activityResponse}" method="post">
+    <fieldset>
+        <label>Id</label>
+        <input type="number" name="id" th:value="*{id}" placeholder="Id">
+        <br/>
+        <input type="submit" th:value="Delete Activities">
+    </fieldset>
+</form>
+</body>
+</html>

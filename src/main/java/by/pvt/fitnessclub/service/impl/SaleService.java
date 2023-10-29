@@ -10,15 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class SaleService {
 
-    @Autowired
     private SalesRepository salesRepository;
 
+    @Autowired
+    public SaleService(SalesRepository salesRepository) {
+        this.salesRepository = salesRepository;
+    }
+
     public Sales save(Sales sale) {
-        salesRepository.save(sale);
-        return sale;
+        Sales sales = salesRepository.save(sale);
+        return sales;
     }
 
     public void delete(Long id) {

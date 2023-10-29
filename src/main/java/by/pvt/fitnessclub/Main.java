@@ -1,12 +1,11 @@
 package by.pvt.fitnessclub;
 
 import by.pvt.fitnessclub.config.HibernateConfig;
-import by.pvt.fitnessclub.entity.Sales;
+import by.pvt.fitnessclub.controller.ActivitiesController;
+import by.pvt.fitnessclub.entity.*;
 import by.pvt.fitnessclub.repository.jpa.*;
-import by.pvt.fitnessclub.service.ClientService;
-import by.pvt.fitnessclub.service.OfficeService;
-import by.pvt.fitnessclub.service.impl.ClientServiceDao;
-import by.pvt.fitnessclub.service.impl.SaleService;
+import by.pvt.fitnessclub.service.*;
+import by.pvt.fitnessclub.service.impl.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,10 +13,11 @@ import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Configuration
-@ComponentScan("by.pvt.fitnessclub")
+@ComponentScan
 public class Main {
     public static void main(String[] args) {
         String localDate = "2023-04-21";
@@ -29,13 +29,28 @@ public class Main {
 //        OfficeService officeService = new OfficeService(new OfficeRepositoryHibernate());
 //        AttendanceService attendanceService = new AttendanceService(new AttendanceRepositoryHibernate(visitorRepositoryHibernate));
         RecordsRepositoryHibernate recordsRepositoryHibernate = new RecordsRepositoryHibernate();
-        AttendanceRepositoryHibernate attendanceRepositoryHibernate = new AttendanceRepositoryHibernate(visitorRepositoryHibernate);
+        AttendanceRepositoryHibernate attendanceRepositoryHibernate = new AttendanceRepositoryHibernate();
         OfficeRepositoryHibernate officeRepositoryHibernate = new OfficeRepositoryHibernate();
 
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(HibernateConfig.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
+        ActivitiesController activitiesController = applicationContext.getBean("activitiesController", ActivitiesController.class);
         SaleService saleService = applicationContext.getBean("saleService",SaleService.class);
-        Sales sales = new Sales(null, new BigDecimal(1.2), LocalDate.of(2023, 4,3), LocalDate.of(2023, 7,26), "Active");
-        System.out.println(saleService.save(sales));
+        OfficeService officeService = applicationContext.getBean("officeServiceDao", OfficeService.class);
+        ClientService clientService = applicationContext.getBean("clientServiceDao", ClientService.class);
+        RecordsService recordsService = applicationContext.getBean("recordsWithFieldsServiceDao",RecordsService.class);
+        AttendanceService attendanceService = applicationContext.getBean("attendanceServiceDao", AttendanceService.class);
+        VisitorService visitorService = applicationContext.getBean("visitorServiceDao", VisitorService.class);
+//        Sales sales = new Sales(null, new BigDecimal(1.2), LocalDate.of(2023, 4,3), LocalDate.of(2023, 7,26), "Active");
+//        System.out.println(saleService.save(sales));
+
+        Office office = officeService.findById(7L);
+        Client client = clientService.findById(12L);
+        RecordsWithFields records = new RecordsWithFields(null, client, office,  LocalDateTime.of(2023, 5,20, 12, 15, 23));
+
+//        System.out.println(recordsService.save(records));
+//        System.out.println(attendanceService.countOfAttendanceByVisitor(9L));
+//        System.out.println(recordsService.save(records, 12L));
+
 //        OfficeService officeService = applicationContext.getBean("officeService", OfficeService.class);
 //        System.out.println(officeService.getSmallOffices());
 //        ClientService clientService = applicationContext.getBean("clientService",ClientService.class);

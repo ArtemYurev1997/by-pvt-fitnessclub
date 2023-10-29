@@ -22,7 +22,7 @@ import java.util.Properties;
 @ComponentScan("by.pvt.fitnessclub")
 @EnableJpaRepositories("by.pvt.fitnessclub.repository")
 @EnableTransactionManagement
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 public class HibernateConfig {
     @Value("${server.url}")
     private String url;

@@ -8,15 +8,17 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
 public class EmployeeRepositoryHibernate {
-    private final SessionFactory sessionFactory;
+    @Autowired
+    private  SessionFactory sessionFactory;
 
     public EmployeeRepositoryHibernate() {
-        this.sessionFactory = HibernateJavaConfiguration.getSessionFactory();
+//        this.sessionFactory = HibernateJavaConfiguration.getSessionFactory();
     }
 
     public List<Employee> findByMaxSalary() {

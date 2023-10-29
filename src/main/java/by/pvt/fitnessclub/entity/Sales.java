@@ -20,10 +20,10 @@ public class Sales {
         private Long id;
         @Column(name = "value")
         private BigDecimal value;
-        @Column(name = "start")
+        @Column(name = "start_date")
         private LocalDate start;
-        @Column(name = "end")
-        private LocalDate end;
+        @Column(name = "end_date")
+        private LocalDate endDate;
         @Column(name = "status")
         private String status;
 }

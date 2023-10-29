@@ -23,4 +23,5 @@ public class Employee extends Client {
     private String post;
     @Column(name = "amount_spent")
     private BigDecimal salary;
+
 }

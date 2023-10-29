@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 
 @Table(schema = "testsch", name ="records")
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecordsWithFields {
@@ -28,4 +30,5 @@ public class RecordsWithFields {
     private Office officeId;
     @Column(name = "date_and_time")
     private LocalDateTime dateAndTime;
+
 }

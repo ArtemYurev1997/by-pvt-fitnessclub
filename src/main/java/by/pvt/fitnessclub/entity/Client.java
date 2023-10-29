@@ -11,13 +11,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 //@MappedSuperclass
 //@Where(clause = "status = 'PREMIUM'")
 public class Client {
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
@@ -28,6 +27,7 @@ public class Client {
     private Integer age;
     @Embedded
     private Address address;
-    @OneToMany(mappedBy = "clientId", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "clientId", cascade = CascadeType.ALL)
     private List<RecordsWithFields> recordsWithFields;
+
 }

@@ -6,7 +6,7 @@ import by.pvt.fitnessclub.repository.ClientDaoRepository;
 import java.util.List;
 
 public interface ClientService {
-     void addClient(Client client);
+     Client addClient(Client client);
 
      void delete(Long id);
 
