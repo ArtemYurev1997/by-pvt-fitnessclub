@@ -3,7 +3,7 @@ package by.pvt.fitnessclub.dto;
 import lombok.Data;
 
 @Data
-public class ClientResponse {
+public class ClientRequest {
     private Long id;
     private String name;
     private String surname;

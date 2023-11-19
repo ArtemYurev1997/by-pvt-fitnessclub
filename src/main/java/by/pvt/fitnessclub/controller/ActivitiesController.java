@@ -1,9 +1,11 @@
 package by.pvt.fitnessclub.controller;
 
+import by.pvt.fitnessclub.dto.ActivitiesRequest;
+import by.pvt.fitnessclub.dto.ActivitiesResponse;
+import by.pvt.fitnessclub.dto.ActivitiesUpdateRequest;
 import by.pvt.fitnessclub.entity.Activities;
 import by.pvt.fitnessclub.service.ActivitiesService;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +30,9 @@ public class ActivitiesController {
     @ModelAttribute
     public void initAttribute(Model model) {
         model.addAttribute("activitiesModel", new Activities());
+        model.addAttribute("activitiesResponse", new ActivitiesResponse());
+        model.addAttribute("activitiesRequest", new ActivitiesRequest());
+        model.addAttribute("activitiesUpdateRequest", new ActivitiesUpdateRequest());
     }
 
     @GetMapping("/activities")
@@ -49,7 +54,7 @@ public class ActivitiesController {
     }
 
     @PostMapping("/addActivities")
-    public ModelAndView addActivities(Activities activities, BindingResult bindingResult, Model model) {
+    public ModelAndView addActivities(ActivitiesRequest activities, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("activities/activities");
         if(bindingResult.hasErrors()) {
@@ -81,10 +86,10 @@ public class ActivitiesController {
     }
 
     @PostMapping("/updateActivities")
-    public ModelAndView updateActivities(@Validated Activities activities) {
+    public ModelAndView updateActivities(@Validated ActivitiesUpdateRequest activities) {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("activities/activities");
-    var activity = activitiesService.save(activities);
+    var activity = activitiesService.update(activities);
     modelAndView.addObject("updateActivity", activity);
     return modelAndView;
     }

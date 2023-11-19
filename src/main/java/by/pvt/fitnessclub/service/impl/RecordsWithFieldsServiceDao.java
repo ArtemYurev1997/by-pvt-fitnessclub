@@ -35,8 +35,8 @@ public class RecordsWithFieldsServiceDao implements RecordsService {
     @Transactional
     @Override
     public RecordsWithFields save(RecordsWithFields recordsWithFields, Long id) {
-        if(attendanceService.countOfAttendanceByVisitor(id) > 1) {
-            Visitor visitor = visitorService.findById(id);
+        Visitor visitor = visitorService.findById(id);
+        if(attendanceService.countOfAttendanceByVisitor(id) > 1 && visitor.getStatus() != ClientStatus.PREMIUM) {
             visitor.setStatus(ClientStatus.PREMIUM);
             visitorService.add(visitor);
             return recordsDao.save(recordsWithFields);

@@ -1,6 +1,6 @@
 package by.pvt.fitnessclub;
 
-import by.pvt.fitnessclub.config.HibernateConfig;
+
 import by.pvt.fitnessclub.controller.ActivitiesController;
 import by.pvt.fitnessclub.entity.*;
 import by.pvt.fitnessclub.repository.jpa.*;

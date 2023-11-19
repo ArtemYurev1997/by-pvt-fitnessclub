@@ -1,11 +1,11 @@
 package by.pvt.fitnessclub.repository.db;
 
-import by.pvt.fitnessclub.config.HibernateConfiguration;
-import by.pvt.fitnessclub.entity.Client;
-import by.pvt.fitnessclub.repository.ClientDaoRepository;
-
-import jakarta.persistence.*;
-import java.util.List;
+//import by.pvt.fitnessclub.config.HibernateConfiguration;
+//import by.pvt.fitnessclub.entity.Client;
+//import by.pvt.fitnessclub.repository.ClientDaoRepository;
+//
+//import jakarta.persistence.*;
+//import java.util.List;
 
 public class ClientRepositoryDB  {
 //    public void addClient(Client client) {

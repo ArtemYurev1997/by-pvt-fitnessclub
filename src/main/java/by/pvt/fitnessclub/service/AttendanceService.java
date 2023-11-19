@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AttendanceService {
 
-     Attendance save(Attendance attendance);
+     Attendance save(Long activityId, Long visitorId);
 
     void delete(Long id);
 

@@ -3,6 +3,8 @@ package by.pvt.fitnessclub.entity;
 import by.pvt.fitnessclub.enums.ClientStatus;
 import lombok.*;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class Visitor extends Client {
     @Enumerated(EnumType.STRING)
     private ClientStatus status;
     @Column(name = "amount_spent")
-    private Double amountSpent;
+    private BigDecimal amountSpent;
     @OneToMany(mappedBy = "visitor")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
